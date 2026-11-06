@@ -35,13 +35,13 @@ using Pii = pair<int, int>;
 
 inline bool Check(string s, const string& t, const vector<int>& p, const int& n,
                   const int& m, const int& mid) {
-  for (int i = 0; i < mid; i++) {
+  for (int i = 0; i < mid; ++i) {
     s[p[i] - 1] = '_';
   }
   int j = 0;
-  for (int i = 0; i < n && j < m; i++) {
+  for (int i = 0; i < n && j < m; ++i) {
     if (s[i] == t[j]) {
-      j++;
+      ++j;
     }
   }
   return j == m;
