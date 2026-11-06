@@ -32,25 +32,26 @@ using Pii = pair<int, int>;
   return os << (long long)a;
 }
 
+constexpr int cBits = 8;
+constexpr int cDigits = 64;
+constexpr int cBase = 1 << cBits;
+constexpr uint64_t cMask = cBase - 1;
+
 void RadixSort(vector<uint64_t>& a) {
-  constexpr int bits = 8;
-  constexpr int digits = 64;
-  constexpr int base = 1 << bits;
-  constexpr uint64_t mask = base - 1;
   vector<uint64_t> tmp(a.size());
-  vector<Uint> cnt(base);
-  for (Uint shift = 0; shift < digits; shift += bits) {
+  vector<Uint> cnt(cBase);
+  for (Uint shift = 0; shift < cDigits; shift += cBits) {
     for (Uint& x : cnt) {
       x = 0;
     }
     for (const uint64_t& x : a) {
-      cnt[(x >> shift) & mask]++;
+      ++cnt[(x >> shift) & cMask];
     }
-    for (Uint i = 1; i < base; i++) {
+    for (Uint i = 1; i < cBase; ++i) {
       cnt[i] += cnt[i - 1];
     }
-    for (int i = (int)a.size() - 1; i >= 0; i--) {
-      tmp[--cnt[(a[i] >> shift) & mask]] = a[i];
+    for (int i = (int)a.size() - 1; i >= 0; --i) {
+      tmp[--cnt[(a[i] >> shift) & cMask]] = a[i];
     }
     a.swap(tmp);  // O(1)
   }
