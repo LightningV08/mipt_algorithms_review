@@ -50,13 +50,13 @@ void MergeSort(vector<Pii>& v, const int& l, const int& r) {
       tmp.push_back(v[b++]);
     }
   }
-  for (; a < mid; a++) {
+  for (; a < mid; ++a) {
     tmp.push_back(v[a]);
   }
-  for (; b < r; b++) {
+  for (; b < r; ++b) {
     tmp.push_back(v[b]);
   }
-  for (int i = 0; i < r - l; i++) {
+  for (int i = 0; i < r - l; ++i) {
     v[i + l] = tmp[i];
   }
 }
@@ -79,7 +79,7 @@ signed main() {
   vector<int> r;
   l.reserve(n), r.reserve(n);
   l.push_back(a[0].first), r.push_back(a[0].second);
-  for (int i = 1; i < n; i++) {
+  for (int i = 1; i < n; ++i) {
     if (a[i].second <= r.back()) {
       continue;
     }
@@ -90,7 +90,7 @@ signed main() {
     }
   }
   cout << l.size() << '\n';
-  for (int i = 0; i < (int)l.size(); i++) {
+  for (int i = 0; i < (int)l.size(); ++i) {
     cout << l[i] << ' ' << r[i] << '\n';
   }
   return 0;
