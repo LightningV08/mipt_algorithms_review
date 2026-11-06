@@ -21,7 +21,7 @@ int main() {
   int n;
   cin >> n;
   vector<Ld> prefix_logs(n + 1);
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < n; ++i) {
     Ld value;
     cin >> value;
     prefix_logs[i + 1] = prefix_logs[i] + log(value);
