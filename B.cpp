@@ -32,9 +32,13 @@ using Pii = pair<int, int>;
   return os << (long long)a;
 }
 
+constexpr int cMod = 10004321;
+constexpr int cFirstMultiplier = 123;
+constexpr int cSecondMultiplier = 45;
+
 inline void InsertSort(vector<int>& v, const int& l, const int& r) {
-  for (int k = l + 1; k < r; k++) {
-    for (int i = k; i > l && v[i] < v[i - 1]; i--) {
+  for (int k = l + 1; k < r; ++k) {
+    for (int i = k; i > l && v[i] < v[i - 1]; --i) {
       swap(v[i], v[i - 1]);
     }
   }
@@ -50,7 +54,7 @@ Pii Partition(vector<int>& v, const int& l, const int& r, const int& p) {
     } else if (v[i] > p) {
       swap(v[i], v[--b]);
     } else {
-      i++;
+      ++i;
     }
   }
   return {a, b};
@@ -95,11 +99,8 @@ signed main() {
   if (n > 1) {
     a[1] = a1;
   }
-  constexpr int mod = 10004321;
-  constexpr int x = 123;
-  constexpr int y = 45;
-  for (int i = 2; i < n; i++) {
-    a[i] = (a[i - 1] * x + a[i - 2] * y) % mod;
+  for (int i = 2; i < n; ++i) {
+    a[i] = (a[i - 1] * cFirstMultiplier + a[i - 2] * cSecondMultiplier) % cMod;
   }
   cout << NthElement(a, 0, n, k - 1) << '\n';
   return 0;
